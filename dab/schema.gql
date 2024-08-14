@@ -1,0 +1,22 @@
+type Conference @model {
+  id: ID!
+  name: String!
+  location: String
+  year: Int!
+  startDate: String
+  endDate: String
+  url: String
+  mainTag: String
+  talks: [Talk!]!
+}
+
+type Talk @model {
+  id: ID
+  title: String!
+  abstract: String
+  mainTag: String
+  talkTime: String
+  talkLength: Int
+  tags: [String]
+  talkId: String!
+}

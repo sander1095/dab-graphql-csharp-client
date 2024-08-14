@@ -1,0 +1,86 @@
+{
+  "$schema": "https://github.com/Azure/data-api-builder/releases/download/v1.1.7/dab.draft.schema.json",
+  "data-source": {
+    "database-type": "cosmosdb_nosql",
+    "connection-string": "@env('COSMOSDB_CONNECTIONSTRING')",
+    "options": {
+      "database": "stacy-clouds",
+      "container": null,
+      "schema": "schema.gql"
+    }
+  },
+  "runtime": {
+    "rest": {
+      "enabled": false,
+      "path": "/api",
+      "request-body-strict": true
+    },
+    "graphql": {
+      "enabled": true,
+      "path": "/graphql",
+      "allow-introspection": true
+    },
+    "host": {
+      "cors": {
+        "origins": [],
+        "allow-credentials": false
+      },
+      "authentication": {
+        "provider": "StaticWebApps"
+      },
+      "mode": "development"
+    }
+  },
+  "entities": {
+    "Conference": {
+      "source": {
+        "object": "conferences"
+      },
+      "graphql": {
+        "enabled": true,
+        "type": {
+          "singular": "Conference",
+          "plural": "Conferences"
+        }
+      },
+      "rest": {
+        "enabled": false
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "read"
+            }
+          ]
+        }
+      ]
+    },
+    "Talk": {
+      "source": {
+        "object": "talks"
+      },
+      "graphql": {
+        "enabled": true,
+        "type": {
+          "singular": "Talk",
+          "plural": "Talks"
+        }
+      },
+      "rest": {
+        "enabled": false
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "read"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
