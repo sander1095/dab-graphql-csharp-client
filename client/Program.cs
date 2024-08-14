@@ -1,4 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
+// See https://aka.ms/new-console-template for more information
 
 using GraphQL;
 using GraphQL.Client.Http;
@@ -36,7 +36,7 @@ var result = await graphQlClient.SendQueryAsync<ConferenceData>(new GraphQLReque
     }"
 });
 
-Console.WriteLine(result.Data.Conferences.Items.Count);
+Console.WriteLine($"You have {conferencesResult.Data.Conferences.Items.Count} conferences in cosmosdb");
 Console.ReadKey();
 
 public class ConferenceData
