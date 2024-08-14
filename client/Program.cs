@@ -1,4 +1,4 @@
-// See https://aka.ms/new-console-template for more information
+﻿// See https://aka.ms/new-console-template for more information
 
 using GraphQL;
 using GraphQL.Client.Http;
@@ -10,7 +10,7 @@ var graphQlClient = new GraphQLHttpClient("http://localhost:5000/graphql/", new 
 
 var conferencesResult = await graphQlClient.SendQueryAsync<ConferencesData>(new GraphQLRequest
 {
-    Query = 
+    Query =
     @"{
         conferences {
             items {
@@ -35,7 +35,22 @@ var conferencesResult = await graphQlClient.SendQueryAsync<ConferencesData>(new 
     }"
 });
 
+var talksResult = await graphQlClient.SendQueryAsync<TalksData>(new GraphQLRequest
+{
+    Query =
+    @"{
+        talks {
+          items {
+            id
+            mainTag
+            title
+          }
+        }
+      }"
+});
+
 Console.WriteLine($"You have {conferencesResult.Data.Conferences.Items.Count} conferences in cosmosdb");
+Console.WriteLine($"You have {talksResult.Data.Talks.Items.Count} talks in cosmosdb");
 Console.ReadKey();
 
 public class ConferencesData
@@ -70,4 +85,22 @@ public class ConferenceTalk
     public int TalkLength { get; set; }
     public string TalkTime { get; set; }
     public string Title { get; set; }
+}
+
+// Below is the code for the wrapper around talk data.
+public class TalksData
+{
+    public TalkList Talks { get; set; } = new();
+}
+
+public class TalkList
+{
+    public List<Talk> Items { get; set; } = [];
+}
+
+public class Talk
+{
+    public string Id { get; set; }
+    public string Title { get; set; }
+    public string MainTag { get; set; }
 }

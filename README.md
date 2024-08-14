@@ -1,6 +1,5 @@
 # graphql-dab
 
-
 ## Setup
 ### DAB
 - Create an `.env` file in `dab` with the following: `COSMOSDB_CONNECTIONSTRING="PLACE_COSMOSDB_CONNECTIONSTRING_HERE"`
@@ -20,4 +19,5 @@
 - run `dotnet watch run` in `client`
 - You should see the amount of conferences and talks in your cosmosdb database in the terminal.
 
-
+# Issues
+I'm not quite happy with having to insert `ConferenceTalk` as an entity in `dab-config.json` in order to get the model to work. I've created the following GitHub issue for it: https://github.com/Azure/data-api-builder/issues/2335

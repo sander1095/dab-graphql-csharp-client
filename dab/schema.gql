@@ -7,10 +7,10 @@ type Conference @model {
   endDate: String
   url: String
   mainTag: String
-  talks: [Talk!]!
+  talks: [ConferenceTalk!]!
 }
 
-type Talk {
+type ConferenceTalk {
   talkId: ID!
   title: String!
   abstract: String
@@ -18,4 +18,10 @@ type Talk {
   talkTime: String
   talkLength: Int
   tags: [String]
+}
+
+type Talk @model {
+  id: ID!
+  title: String!
+  mainTag: String
 }

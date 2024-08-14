@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/Azure/data-api-builder/releases/download/v1.1.7/dab.draft.schema.json",
+  "$schema": "https://github.com/Azure/data-api-builder/releases/download/v1.2.10/dab.draft.schema.json",
   "data-source": {
     "database-type": "cosmosdb_nosql",
     "connection-string": "@env('COSMOSDB_CONNECTIONSTRING')",
@@ -67,6 +67,27 @@
           "singular": "Talk",
           "plural": "Talks"
         }
+      },
+      "rest": {
+        "enabled": false
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "read"
+            }
+          ]
+        }
+      ]
+    },
+    "ConferenceTalk": {
+      "source": {
+        "object": "WE_DO_NOT_EXPOSE_THIS_BUT_NEED_IT_TO_GET_DAB_TO_WORK_SEE_ISSUE_2335_ON_DAB_REPO_ON_GITHUB"
+      },
+      "graphql": {
+        "enabled": false
       },
       "rest": {
         "enabled": false
