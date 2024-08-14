@@ -8,7 +8,7 @@ using GraphQL.Client.Serializer.SystemTextJson;
 // This will be http://localhost:4280/data-api/graphql if you're using SWA CLI instead
 var graphQlClient = new GraphQLHttpClient("http://localhost:5000/graphql/", new SystemTextJsonSerializer());
 
-var result = await graphQlClient.SendQueryAsync<ConferenceData>(new GraphQLRequest
+var conferencesResult = await graphQlClient.SendQueryAsync<ConferencesData>(new GraphQLRequest
 {
     Query = 
     @"{
@@ -22,11 +22,10 @@ var result = await graphQlClient.SendQueryAsync<ConferenceData>(new GraphQLReque
                 url
                 year
                 talks {
+                    talkId
                     abstract
-                    id
                     mainTag
                     tags
-                    talkId
                     talkLength
                     talkTime
                     title
@@ -39,7 +38,7 @@ var result = await graphQlClient.SendQueryAsync<ConferenceData>(new GraphQLReque
 Console.WriteLine($"You have {conferencesResult.Data.Conferences.Items.Count} conferences in cosmosdb");
 Console.ReadKey();
 
-public class ConferenceData
+public class ConferencesData
 {
     public ConferenceList Conferences { get; set; } = new();
 }
@@ -59,16 +58,15 @@ public class Conference
     public DateOnly StartDate { get; set; }
     public string Url { get; set; }
     public int Year { get; set; }
-    public List<Talk> Talks { get; set; } = [];
+    public List<ConferenceTalk> Talks { get; set; } = [];
 }
 
-public class Talk
+public class ConferenceTalk
 {
+    public string TalkId { get; set; }
     public string Abstract { get; set; }
-    public string Id { get; set; }
     public string MainTag { get; set; }
     public List<string> Tags { get; set; }
-    public string TalkId { get; set; }
     public int TalkLength { get; set; }
     public string TalkTime { get; set; }
     public string Title { get; set; }

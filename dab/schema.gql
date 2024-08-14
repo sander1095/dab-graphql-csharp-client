@@ -10,12 +10,12 @@ type Conference @model {
   talks: [Talk!]!
 }
 
-type Talk @model {
+type Talk {
+  talkId: ID!
   title: String!
   abstract: String
   mainTag: String
   talkTime: String
   talkLength: Int
   tags: [String]
-  talkId: String!
 }
